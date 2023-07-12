@@ -1,4 +1,3 @@
-import net.bytebuddy.matcher.FilterableList;
 import org.testng.annotations.Test;
 
 import java.util.*;
@@ -27,6 +26,31 @@ public class code_interview {
             System.out.println("The given string is a palindrome");
         } else {
             System.out.println("The given string is not a palindrome");
+        }
+
+    }
+
+    @Test
+    public boolean optCheckPalindrome(String str) {
+        String input = str;
+        char[] charInput = input.toCharArray();
+        for (int i = 0; i < input.length() / 2; i++) {
+            if (charInput[i] != charInput[charInput.length - 1 - i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Test
+    public void checkOptPalidrome() {
+        String in = "madam";
+        boolean output = optCheckPalindrome(in);
+        if (output == true) {
+            System.out.println("The given input : " + in + " is a palindrome");
+        } else {
+            System.out.println("The given input : " + in + " is not a palindrome");
+
         }
 
     }
@@ -136,7 +160,7 @@ public class code_interview {
         int arr2_sum = 0;
         int counter = 0;
         System.out.println("The input array is: " + input);
-        for (int i = 0; i <= input.size() - 1; i++) {
+        for (int i = 0; i <= input.size() - 2; i++) {
             arr2.clear();
             arr2_sum = 0;
             arr1.add(input.get(i));
@@ -156,7 +180,7 @@ public class code_interview {
 
     @Test
     public void test_array_comparator() {
-        List<Integer> n = new ArrayList<>(List.of(10, 1, 5, 10, 7, 8, 2, 14, 4));
+        List<Integer> n = new ArrayList<>(List.of(3,10,-5,6));
         array_comparator(n);
     }
 
@@ -208,19 +232,19 @@ public class code_interview {
         int count = 0;
         StringBuilder nwStr = new StringBuilder();
         char[] input = str.toCharArray();
-        char prevChar=input[input.length-1];
+        char prevChar = input[input.length - 1];
         for (int i = 0; i < input.length; i++) {
             if (input[i] == prevChar) {
                 count += 1;
                 if (count <= 2) {
                     nwStr.append(input[i]);
                 }
-                prevChar=input[i];
+                prevChar = input[i];
             } else if ((input[i] != prevChar)) {
 //                nwStr.append(input[i]);
                 nwStr.append(input[i]);
                 count = 1;
-                prevChar=input[i];
+                prevChar = input[i];
             }
         }
         System.out.println("The given Sting is : " + str + " the sequence is :" + seq);
@@ -236,6 +260,91 @@ public class code_interview {
         stripChar(input, seq);
     }
 
+    /*
+    Given a square matrix, calculate the absolute difference between the sums of its diagonals.
+
+For example, the square matrix  is shown below:
+
+11 2  4
+2  5  6
+10 8 -12
+The left-to-right diagonal = . The right to left diagonal = . Their absolute difference is .
+
+Explanation
+
+The primary diagonal is:
+
+11
+   5
+     -12
+Sum across the primary diagonal: 11 + 5 - 12 = 4
+
+The secondary diagonal is:
+
+     4
+   5
+10
+Sum across the secondary diagonal: 4 + 5 + 10 = 19
+Difference: |4 - 19| = 15
+     */
+    @Test
+    public void diagonalDifference(int[][] val) {
+        int rightdiff = 0;
+        int leftdiff = 0;
+        int absdiff = 0;
+        for (int i = 0; i < val.length; i++) {
+            rightdiff += val[i][i];
+            leftdiff += val[i][val.length - i - 1];
+
+        }
+        absdiff = Math.abs(rightdiff - leftdiff);
+        System.out.println("The absolute difference between the right and left diagonal values of the array is: " + absdiff);
+    }
+
+    @Test
+    public void testDiagonalDifference() {
+        int[][] input = {
+                {11, 2, 4},
+                {2 ,5, 6},
+                {10, 8, - 12}
+        };
+        diagonalDifference(input);
+    }
+    
+/*Caesar's cipher shifts each letter by a number of letters. If the shift takes you past the end of the alphabet, 
+just rotate back to the front of the alphabet. In the case of a rotation by 3, w, x, y and z would map to z, a, 
+b and c. 
+
+Original alphabet:      abcdefghijklmnopqrstuvwxyz
+Alphabet rotated +3:    defghijklmnopqrstuvwxyzabc
+*/
+
+    @Test
+
+    public String cipherText(String message, int shift)
+    {
+        final String alpha="abcdefghijklmnopqrstuvwxyz";
+        String msg=message.toLowerCase();
+        String cipheredTxt="";
+        for (int i=0;i<msg.length();i++)
+        {
+            int charPos=alpha.indexOf(msg.charAt(i));
+            int keyVal= (charPos+shift)%26;
+            char replaceVal= alpha.charAt(keyVal);
+            cipheredTxt +=replaceVal;
+        }
+        return cipheredTxt;
+        
+    }
+    @Test
+    public void testCipherText()
+    {
+        String input="Aabdw.xyzZ";
+        int shiftBy=3;
+        String ciphered=cipherText(input,shiftBy);
+        System.out.println("The given input : "+input+" is ciphered into :"+ciphered);
+
+    }
 
 }
 
