@@ -29,7 +29,7 @@ public class code_interview {
         }
 
     }
-
+// Optimized way to check palindrom
     @Test
     public boolean optCheckPalindrome(String str) {
         String input = str;
