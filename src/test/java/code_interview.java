@@ -345,7 +345,35 @@ Alphabet rotated +3:    defghijklmnopqrstuvwxyzabc
         System.out.println("The given input : "+input+" is ciphered into :"+ciphered);
 
     }
+    public static int NumberManupulator(int num) {
+        String numString = Integer.toString(num);
+        int maxLength = numString.length();
+        int biggestNumber = num;
+        System.out.println("The possible combinations are : ");
+        for (int i = 0; i <= maxLength; i++) {
+            StringBuilder sb = new StringBuilder(numString);
+            sb.insert(i, '5');
+            int currentNumber = Integer.parseInt(sb.toString());
+            System.out.println(currentNumber);
+            biggestNumber = Math.max(biggestNumber, currentNumber);
+        }
 
+        return biggestNumber;
+    }
+    @Test
+    public static void TestNumberManupulator()
+    {
+        int input =623787;
+        System.out.println("The given input number is : "+input);
+        int biggestNumber = NumberManupulator(input);
+        System.out.println("The Biggest number  among  the combination is : " + biggestNumber);
+    }
+/* Question asked during Data.ai technical interview.
+# add 5 to each decimal places from left to right of a given number and find which number among that combination is the greatest. -5000 to 5000 range could be given as input.
+            # eg. given number : 1356 add 5 to the left 51356, then move 5
+            # to the next decimal place 15356, 13556, 13556,13565.
+
+ */
 }
 
 
