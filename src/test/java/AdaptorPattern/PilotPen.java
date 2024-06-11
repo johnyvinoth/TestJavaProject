@@ -1,14 +1,12 @@
-package FactoryPattern;
+package AdaptorPattern;
 
-public class PilotPen implements Pen
+public class PilotPen
 {
 
-    @Override
-    public void write() {
-        System.out.println("Writing with Pilot pen");
 
-        //this line is to check the default function and not related to Factory pattern.
-        Pen.super.test();
+    public void mark(String str) {
+        System.out.println("Writing with Pilot pen : "+str);
+
 
     }
 

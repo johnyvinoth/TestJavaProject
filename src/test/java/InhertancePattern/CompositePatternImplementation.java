@@ -1,4 +1,4 @@
-package CompositPattern;
+package InhertancePattern;
 
 public class CompositePatternImplementation {
 

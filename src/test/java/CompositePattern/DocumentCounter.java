@@ -1,2 +1,5 @@
-package CompositePattern;public interface DocumentCounter {
+package CompositePattern;
+
+public interface DocumentCounter {
+    String getNewDocumentName ();
 }

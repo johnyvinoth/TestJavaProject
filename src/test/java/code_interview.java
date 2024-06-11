@@ -2,6 +2,8 @@ import org.testng.annotations.Test;
 
 import java.util.*;
 
+import static java.lang.Math.max;
+
 public class code_interview {
     @Test(enabled = false)
     public String reverseString(String s) {
@@ -11,6 +13,7 @@ public class code_interview {
         String temp = str.replaceAll(" ", "");
         char[] charArr = temp.toCharArray();
         for (int i = charArr.length - 1; i >= 0; i--) {
+
             RevStr += charArr[i];
         }
         System.out.println("The input string is : " + str);
@@ -29,7 +32,8 @@ public class code_interview {
         }
 
     }
-// Optimized way to check palindrom
+
+    // Optimized way to check palindrom
     @Test
     public boolean optCheckPalindrome(String str) {
         String input = str;
@@ -67,16 +71,10 @@ public class code_interview {
             if (!hash.containsKey(in)) {
                 hash.put(in, 1);
             } else {
-//                for(String key:hash.keySet())
-//                {
-////                    hash.computeIfPresent(key,(k,v)->v=v+1);
-//                    int curr=hash.get(key);
-//                    curr+=1;
-//                    hash.put(key,curr);
-//                }
                 int curr = hash.get(in);
                 curr += 1;
                 hash.put(in, curr);
+
             }
         }
         for (String key : hash.keySet()) {
@@ -84,7 +82,7 @@ public class code_interview {
         }
     }
 
-    @Test
+
     public void findArmstrongNum(int i) {
 //        int input=1534;
         int input = i;
@@ -149,7 +147,7 @@ public class code_interview {
     /*Take an array as input eg [10,5,3,1] and split in two different array combination and find how many combinations
    are having sum of left array greater than right array. eg left : [10] = 10 right :[5,3,1] =9 so this is one
    combination like this need find how many such combination from the function. */
-    @Test
+
     public void array_comparator(List<Integer> n) {
 //        List<Integer> input = new ArrayList<>(List.of(10, 5, 3, 1));
         List<Integer> input = new ArrayList<>();
@@ -160,7 +158,7 @@ public class code_interview {
         int arr2_sum = 0;
         int counter = 0;
         System.out.println("The input array is: " + input);
-        for (int i = 0; i <= input.size() - 2; i++) {
+        for (int i = 0; i < input.size() - 1; i++) {
             arr2.clear();
             arr2_sum = 0;
             arr1.add(input.get(i));
@@ -180,18 +178,20 @@ public class code_interview {
 
     @Test
     public void test_array_comparator() {
-        List<Integer> n = new ArrayList<>(List.of(3,10,-5,6));
+        List<Integer> n = new ArrayList<>(List.of(3, 10, -5, 6));
         array_comparator(n);
     }
 
     /*
  Interview questions asked during the Aspire first round.
- Total gift card value is 10000 and if there are duplicate products in the list then user should be informed and the duplicate entires to be removed, should allow user to purchase only the amount available in the gift card.
+ Total gift card value is 10000 and if there are duplicate products in the list then user should be informed
+ and the duplicate entires to be removed, should allow user to purchase only the amount available in the gift card.
  */
-    @Test
+
     public void validateCart(List<Integer> Prod, int qty, int value) {
         int giftCardValue = 1000;
         Collections.sort(Prod);
+
         boolean outOfValue = false;
         for (int i = 0; i <= Prod.size() - 1; i++) {
 
@@ -227,7 +227,7 @@ public class code_interview {
 
     }
 
-    @Test
+
     public void stripChar(String str, int seq) {
         int count = 0;
         StringBuilder nwStr = new StringBuilder();
@@ -287,7 +287,7 @@ The secondary diagonal is:
 Sum across the secondary diagonal: 4 + 5 + 10 = 19
 Difference: |4 - 19| = 15
      */
-    @Test
+
     public void diagonalDifference(int[][] val) {
         int rightdiff = 0;
         int leftdiff = 0;
@@ -305,8 +305,8 @@ Difference: |4 - 19| = 15
     public void testDiagonalDifference() {
         int[][] input = {
                 {11, 2, 4},
-                {2 ,5, 6},
-                {10, 8, - 12}
+                {2, 5, 6},
+                {10, 8, -12}
         };
         diagonalDifference(input);
     }
@@ -321,31 +321,40 @@ Alphabet rotated +3:    defghijklmnopqrstuvwxyzabc
 
     @Test
 
-    public String cipherText(String message, int shift)
-    {
-        final String alpha="abcdefghijklmnopqrstuvwxyz";
-        String msg=message.toLowerCase();
-        String cipheredTxt="";
-        for (int i=0;i<msg.length();i++)
-        {
-            int charPos=alpha.indexOf(msg.charAt(i));
-            int keyVal= (charPos+shift)%26;
-            char replaceVal= alpha.charAt(keyVal);
-            cipheredTxt +=replaceVal;
+    public String cipherText(String message, int shift) {
+        final String alpha = "abcdefghijklmnopqrstuvwxyz";
+        String msg = message.toLowerCase();
+        String cipheredTxt = "";
+        for (int i = 0; i < msg.length(); i++) {
+            int charPos = alpha.indexOf(msg.charAt(i));
+            int keyVal = (charPos + shift) % 26;
+            char replaceVal = alpha.charAt(keyVal);
+            cipheredTxt += replaceVal;
         }
+
         return cipheredTxt;
-        
-    }
-    @Test
-    public void testCipherText()
-    {
-        String input="Aabdw.xyzZ";
-        int shiftBy=3;
-        String ciphered=cipherText(input,shiftBy);
-        System.out.println("The given input : "+input+" is ciphered into :"+ciphered);
 
     }
-    public static int NumberManupulator(int num) {
+
+    @Test
+    public void testCipherText() {
+        String input = "Aabdw.xyzZ";
+        int shiftBy = 3;
+        String ciphered = cipherText(input, shiftBy);
+        System.out.println("The given input : " + input + " is ciphered into :" + ciphered);
+
+    }
+
+
+    public static int NumberManipulator(int num) {
+        // Convert negative numbers to positive
+        int originalNum = num;
+        boolean isNegative = false;
+        if (num < 0) {
+            num = Math.abs(num);
+            isNegative = true;
+        }
+
         String numString = Integer.toString(num);
         int maxLength = numString.length();
         int biggestNumber = num;
@@ -358,14 +367,19 @@ Alphabet rotated +3:    defghijklmnopqrstuvwxyzabc
             biggestNumber = Math.max(biggestNumber, currentNumber);
         }
 
+        // Convert back to negative if the original number was negative
+        if (isNegative) {
+            biggestNumber *= -1;
+        }
+
         return biggestNumber;
     }
+
     @Test
-    public static void TestNumberManupulator()
-    {
-        int input =623787;
-        System.out.println("The given input number is : "+input);
-        int biggestNumber = NumberManupulator(input);
+    public static void TestNumberManupulator() {
+        int input = -623787;
+        System.out.println("The given input number is : " + input);
+        int biggestNumber = NumberManipulator(input);
         System.out.println("The Biggest number  among  the combination is : " + biggestNumber);
     }
 /* Question asked during Data.ai technical interview.
@@ -374,6 +388,180 @@ Alphabet rotated +3:    defghijklmnopqrstuvwxyzabc
             # to the next decimal place 15356, 13556, 13556,13565.
 
  */
+
+    /*
+    Given an integer array nums, find the
+subarray
+ with the largest sum, and return its sum.
+
+
+
+Example 1:
+
+Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+Output: 6
+Explanation: The subarray [4,-1,2,1] has the largest sum 6.
+Example 2:
+
+Input: nums = [1]
+Output: 1
+Explanation: The subarray [1] has the largest sum 1.
+Example 3:
+
+Input: nums = [5,4,-1,7,8]
+Output: 23
+Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
+     */
+
+    public int maxSumArray(int[] nums) {
+//        int[] arr = {1, 2, -5, 7, -3, 5};
+        int curr_sum = 0;
+        int max_sum = 0;
+
+        if (nums.length == 1) {
+            return nums[0];
+        }
+
+        for (int i : nums) {
+            curr_sum += i;
+            max_sum = max(max_sum, curr_sum);
+            if (curr_sum < 0) {
+                curr_sum = 0;
+            }
+        }
+
+        return max_sum;
+    }
+
+
+    @Test
+    public void test_maxSumArray() {
+//        int[] nums = {-2,1,-3,4,-1,2,1,-5,4}; // output:  6
+//        int[] nums={1}; //Output: 1
+        int[] nums = {5, 4, -1, 7, 8}; //Output: 23
+//
+        System.out.println("The maximum sum of the array is :" + maxSumArray(nums));
+
+    }
+
+    public ArrayList<Integer> two_sum(int[] data, int target) {
+        int difference = 0;
+        Map<Integer, Integer> dict = new HashMap<Integer, Integer>();
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        for (int i = 0; i < data.length; i++) {
+            difference = target - data[i];
+            if (!dict.containsKey(difference)) {
+                dict.put(data[i], i);
+
+            } else {
+                result.add(0, dict.get(difference));
+                result.add(1, i);
+
+                return result;
+            }
+
+        }
+        return null;
+    }
+
+    /*
+      Two Sums: An array will be given and a target will be given. Find the two digits in the array wich will sum up to give
+    the target. eg. array={1, 3, 2, 4, 7, 2, 8} target = 4. Then we should return 0,1 (position) values is 1,3=4
+
+       */
+    @Test
+    public void test_two_sum() {
+
+        int[] data = {1, 3, 2, 4, 7, 2, 8};
+        int target = 11;
+        List<Integer> result = new ArrayList<>();
+
+        result = two_sum(data, target);
+        System.out.println("The numbers : " + data[result.get(0)] + " and " + data[result.get(1)] + " will addup to get: " + target);
+
+    }
+
+    /*
+    Reverse the given string, except the special characters. Special characters should be in the same position as the given
+    string. Eg. Hell#$O*World should be returned as dlro#$W*OlleH
+     */
+    public StringBuilder reverse_string(String str1) {
+        StringBuilder reverse = new StringBuilder();
+        Map<Integer, Character> map = new HashMap<>();
+        for (int i = str1.length() - 1; i >= 0; i--) {
+            Character ch = str1.charAt(i);
+            if (Character.isAlphabetic(ch)) {
+
+                reverse.append(ch);
+            } else {
+                map.put(i, ch);
+            }
+        }
+        for (Integer entry : map.keySet()) {
+            reverse.insert(entry, Character.toString(map.get(entry)));
+        }
+//        for (Map.Entry<Integer, Character> entry : map.entrySet()) {
+//            System.out.println("The Key is : " + entry.getKey()+" and the Value is : " + entry.getValue());
+//        }
+
+
+        return reverse;
+    }
+
+    @Test
+    public void Test_revese_String() {
+        String str = "Hell#$O*World";
+        String reverse;
+        reverse = String.valueOf(reverse_string(str));
+        System.out.println("The reversed string except the special characters is: " + reverse + " and the given string is: " + str);
+    }
+
+    /*
+    If the given string has matching closing brackets then return True else false
+    eg. Str1="{{{}}}" - True
+    Str2="{{{}}}}"- False
+    Str3="{{{}}}[[]]"-True
+    Str4="{{{}}}[[][]"-False
+     */
+
+
+
+/*
+# Leet code question -Longest substring without repeating characters
+Longest substring # s3 = "pwwkew" #ans should be : 4
+s3 = 'abababcabcd'  # ans should be : 4
+ */
+
+public int longestSubstring(String str1)
+{
+    int len=str1.length();
+    Map<Character,Integer> dict = new HashMap<>();
+    int maxlen =0;
+    int left=0;
+    for(int right=0;right<len;right++)
+    {
+        if(dict.containsKey(str1.charAt(right))&& dict.get(str1.charAt(right))>=left)
+        {
+            left=(dict.get(str1.charAt(right)))+1;
+
+        }
+        else {
+            dict.put(str1.charAt(right),right);
+        }
+        maxlen=max(maxlen,right-left+1);
+    }
+
+    return maxlen;
+}
+@Test
+public void TestLongestSubstring()
+{
+//    String s3 = "pwwkew"; //ans should be : 3
+    String s3 = "abcdabcabcde";  // ans should be : 4
+    int output=longestSubstring(s3);
+    System.out.println("The length of the longest substring without repeating character is: " + output);
+
 }
 
+}
 

@@ -1,4 +1,4 @@
-package CompositPattern;// Refactor the AbstractDocumentCounter and DocumentNameCreator classes
+package InhertancePattern;// Refactor the AbstractDocumentCounter and DocumentNameCreator classes
 // so that they use composition rather than inheritance 
 // but their functionality remains the same.
 

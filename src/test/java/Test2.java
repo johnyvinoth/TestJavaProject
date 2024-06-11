@@ -86,6 +86,12 @@ public class Test2 {
             System.out.println("There is no element grabbed.");
         }
     }
+    @Test
+    public static void test()
+    {
+        System.out.println("Testing");
+
+    }
     @AfterClass
     public void teardown()
     {

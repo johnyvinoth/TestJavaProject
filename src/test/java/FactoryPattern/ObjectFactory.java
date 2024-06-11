@@ -1,3 +1,5 @@
+package FactoryPattern;
+
 public class ObjectFactory {
     public static Pen getInstance(String penName) {
         if (penName == null || penName.isEmpty()) {

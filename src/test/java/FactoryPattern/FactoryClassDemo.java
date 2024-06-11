@@ -1,3 +1,4 @@
+package FactoryPattern;
 
 public class FactoryClassDemo {
     public static void main (String[] args)
@@ -7,5 +8,8 @@ public class FactoryClassDemo {
         Pen gp= ObjectFactory.getInstance("GelpeN");
         pp.write();
         gp.write();
+
+        pp.test();
+        gp.test();
     }
 }

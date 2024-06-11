@@ -1,37 +1,21 @@
-package InhertancePattern;
+package CompositePattern;
 
 
+public class DocumentNameCreator implements DocumentCounter {
+   private AbstractDocumentCounter counter;
+    private String prefix;
 
-public class DocumentNameCreator extends  AbstractDocumentCounter
-{
-  private String prefix;
-
-  public DocumentNameCreator(int increment, String prefix)
-  {
-    super (increment);
-    this.prefix = prefix;
-  }
-
-    public DocumentNameCreator(int increment) {
-        super(increment);
+    public DocumentNameCreator(int increment, String prefix) {
+        this.counter=new AbstractDocumentCounter(increment);
+        this.prefix = prefix;
     }
 
 
 
-//  class2 c2= new class();
-
-//  public String getNewDocumentName ()
-//  {
-//      c2.getNewDocumentName1(prefix);
-//  }
-//
-//
-
-
-   public String getNewDocumentName ()
-   {
-     return prefix + getAndIncrement ();
-   }
+    @Override
+    public String getNewDocumentName() {
+        return prefix + counter.getAndIncrement();
+    }
 
 }
 
